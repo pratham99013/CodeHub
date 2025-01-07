@@ -95,16 +95,16 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'chatam',
-#         'USER' : 'postgres',
-#         'PASSWORD' : '',
-#         'HOST' : 'localhost',
-#         'PORT' : ''
-#     }
-# }
+DATABASES = {
+    'default': {
+     'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+     'USER' : 'postgres',
+       'PASSWORD' : os.environ['DB_PASSWORD_YO'],
+       'HOST': os.getenv('DB_HOST'),
+     'PORT' : '5432'
+  }
+ }
 
 # DATABASE_URL = os.getenv('DATABASE_PUBLIC_URL', 'postgresql://postgres:mTCoJmLYXmsvoaKATYhBAdmyyhCgcpFb@monorail.proxy.rlwy.net:34116/railway')
 # url = urlparse(DATABASE_URL)
@@ -119,12 +119,12 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 #         'PORT': url.port,
 #     }
 # }
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',  # The database file will be created in the root directory
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',  # The database file will be created in the root directory
+#     }
+# }
 
 
 
