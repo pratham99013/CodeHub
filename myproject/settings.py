@@ -27,7 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-
+CSRF_TRUSTED_ORIGINS = [
+    'codehub-production-8959.up.railway.app',
+    'https://codehub-production-8959.up.railway.app',
+]
 # Application definition
 
 INSTALLED_APPS = [
