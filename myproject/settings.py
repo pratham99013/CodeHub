@@ -15,6 +15,9 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from urllib.parse import urlparse
 
+from dotenv import load_dotenv
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -28,7 +31,7 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 
 CSRF_TRUSTED_ORIGINS = [
-    'codehub-production-8959.up.railway.app',
+
     'https://codehub-production-8959.up.railway.app',
 ]
 # Application definition
@@ -43,7 +46,7 @@ INSTALLED_APPS = [
     'myapp',
     'userapp',
     'rest_framework',
-      'corsheaders', 
+      'corsheaders',  
 
 ]
 REST_FRAMEWORK = {
@@ -95,30 +98,33 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+
+
+
+# Retrieve the DATABASE URL from the environment or fallback to the default
+DATABASE_URL = os.getenv(
+    'DATABASE_PUBLIC_URL',
+    os.getenv(
+        'DATABASE_URL',
+        'postgresql://postgres:ZwGNIFcVdpxYAktJIfHiGEsmuouQqyZo@viaduct.proxy.rlwy.net:15655/railway'
+    )
+)
+
+# Parse the database URL
+url = urlparse(DATABASE_URL)
+
+# Database configuration
 DATABASES = {
     'default': {
-     'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-     'USER' : 'postgres',
-       'PASSWORD' : os.environ['DB_PASSWORD_YO'],
-       'HOST': os.getenv('DB_HOST'),
-     'PORT' : '5432'
-  }
- }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': url.path[1:],  # Extract the database name (strip the leading '/')
+        'USER': url.username,  # Extract the username
+        'PASSWORD': url.password,  # Extract the password
+        'HOST': url.hostname,  # Extract the hostname
+        'PORT': url.port,  # Extract the port
+    }
+}
 
-# DATABASE_URL = os.getenv('DATABASE_PUBLIC_URL', 'postgresql://postgres:mTCoJmLYXmsvoaKATYhBAdmyyhCgcpFb@monorail.proxy.rlwy.net:34116/railway')
-# url = urlparse(DATABASE_URL)
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': url.path[1:],  # Strip the leading '/'
-#         'USER': url.username,
-#         'PASSWORD': url.password,
-#         'HOST': url.hostname,
-#         'PORT': url.port,
-#     }
-# }
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.sqlite3',
