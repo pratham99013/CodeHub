@@ -15,10 +15,7 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from urllib.parse import urlparse
 
-from dotenv import load_dotenv
 
-load_dotenv()
-DB_PASSWORD_YO = os.getenv('DB_PASSWORD_YO')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -124,7 +121,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',  # Use PostgreSQL
         'NAME': url.path[1:],  # Strip the leading '/' to get the database name
         'USER': url.username,  # Get the username from the URL
-        'PASSWORD': os.getenv('DB_PASSWORD_YO'),  # Get the password from the URL
+        'PASSWORD': url.password,  # Get the password from the URL
         'HOST': url.hostname,  # Get the hostname from the URL
         'PORT': url.port,  # Get the port from the URL
     }
