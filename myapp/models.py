@@ -21,14 +21,14 @@ class Project(models.Model):
     
     @property
     def reviewers(self):
-        queryset = self.review_set.all().values_list('owner__id', flat=True)
+        queryset = self.reviews.all().values_list('owner__id', flat=True)
         return queryset
     
     class Meta:
         ordering = ['-created']
     
     def getvotecount(self):
-        reveiws = self.review_set.all()
+        reveiws = self.reviews.all()
         upvotes = reveiws.filter(value = 'up').count()
         total = reveiws.count()
 

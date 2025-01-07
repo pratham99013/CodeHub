@@ -49,30 +49,52 @@ def viewproject(request, pk):
     context = {'project' : hello, 'form' : form}
     return render(request, 'single-project.html', context) 
 
-@login_required(login_url= "login")
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .models import Tag, Project
+from .forms import ProjectForm
+
+@login_required(login_url="login")
 def createProject(request):
     profile = request.user.profile
     form = ProjectForm()
-    if request.method == 'POST':
-        newtags = request.POST.get('newtags').replace(',',  " ").split()
+    tags = Tag.objects.all()  # Fetch all existing tags to show in the template
 
     if request.method == 'POST':
+        # Get custom tags
+        newtags = request.POST.get('newtags', '').replace(',', ' ').split()
+
+        # Get selected existing tags
+        selected_tags = request.POST.getlist('existing_tags')  # Get list of selected tag IDs
+
+        # Handle form submission
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
-            project = form.save(commit = False)
+            project = form.save(commit=False)
             project.owner = profile
-
             project.save()
-            messages.success(request, 'Project added succesfully')
-            for tag in newtags:
-                tag, created = Tag.objects.get_or_create(name=tag)
-                project.tags.add(tag)
-            
-            return redirect('projects')
-        
 
-    context = {'form' : form}
-    return render(request,  'project_form.html', context)
+            # Add existing tags to the project
+            for tag_id in selected_tags:
+                tag = Tag.objects.get(id=tag_id)
+                project.tags.add(tag)
+
+            # Add custom tags to the project
+            for tag_name in newtags:
+                tag_name = tag_name.strip()
+                if tag_name:  # Ensure tag is not empty
+                    tag, created = Tag.objects.get_or_create(name=tag_name)
+                    project.tags.add(tag)
+
+            messages.success(request, 'Project added successfully')
+            return redirect('projects')
+
+    context = {
+        'form': form,
+        'tags': tags,  # Pass existing tags to the template
+    }
+    return render(request, 'project_form.html', context)
 
 @login_required(login_url= "login")
 def updateProject(request, pk):

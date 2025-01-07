@@ -102,20 +102,25 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 #     }
 # }
 
-DATABASE_URL = os.getenv('DATABASE_PUBLIC_URL', 'postgresql://postgres:mTCoJmLYXmsvoaKATYhBAdmyyhCgcpFb@monorail.proxy.rlwy.net:34116/railway')
-url = urlparse(DATABASE_URL)
+# DATABASE_URL = os.getenv('DATABASE_PUBLIC_URL', 'postgresql://postgres:mTCoJmLYXmsvoaKATYhBAdmyyhCgcpFb@monorail.proxy.rlwy.net:34116/railway')
+# url = urlparse(DATABASE_URL)
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': url.path[1:],  # Strip the leading '/'
+#         'USER': url.username,
+#         'PASSWORD': url.password,
+#         'HOST': url.hostname,
+#         'PORT': url.port,
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': url.path[1:],  # Strip the leading '/'
-        'USER': url.username,
-        'PASSWORD': url.password,
-        'HOST': url.hostname,
-        'PORT': url.port,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # The database file will be created in the root directory
     }
 }
-
 
 
 
@@ -150,20 +155,27 @@ USE_I18N = True
 USE_TZ = True
 
 CORS_ALLOW_ALL_ORIGINS = True
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'chatam9211420@gmail.com'
-EMAIL_HOST_PASSWORD = 'DolaShola@1234'
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'chatam9211420@gmail.com'
+# EMAIL_HOST_PASSWORD = 'DolaShola@1234'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # SMTP server
+EMAIL_PORT = 587              # SMTP port
+EMAIL_USE_TLS = True          # Use TLS
+EMAIL_HOST_USER = 'chatam9211420@gmail.com'  # Sender email address
+EMAIL_HOST_PASSWORD = 'qylt oawy jdlt zfqt'  # App-specific password (not your email password)
+# DEFAULT_FROM_EMAIL = 'Your Website Name <your_email@example.com>'
 
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
-MEDIA_URL = ''
+STATIC_URL = '/static/'
+MEDIA_URL = '/images/'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static'

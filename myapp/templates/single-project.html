@@ -68,25 +68,27 @@
                     {% else %}
                     <a href="{% url 'login' %}?next={{request.path}}">Please login to leave a review</a>
                     {% endif %}
-
                     <div class="commentList">
-                        {% for review in project.review_set.all %}
-                        {% if review.body %}
-                        <div class="comment">
-                            <a href="{% url 'user-profile' review.owner.id  %}">
-                                <img class="avatar avatar--md" src="{{review.owner.profile_image.url}}" alt="user" />
-                            </a>
-
-
-                            <div class="comment__details">
-                                <a href="{% url 'user-profile' review.owner.id  %}"
-                                    class="comment__author">{{review.owner.name}}</a>
-                                <p class="comment__info">{{review.body|linebreaksbr}}</p>
-                            </div>
-
-                        </div>
+                        {% if project.reviews.all %}
+                            <p>Total Reviews: {{ project.reviews.count }}</p>
+                            {% for review in project.reviews.all %}
+                                {% if review.body %}
+                                <div class="comment">
+                                    <a href="{% url 'user-profile' review.owner.id %}">
+                                        <img class="avatar avatar--md" src="{{ review.owner.profile_image.url }}" alt="user" />
+                                    </a>
+                                    <div class="comment__details">
+                                        <a href="{% url 'user-profile' review.owner.id %}" class="comment__author">{{ review.owner.name }}</a>
+                                        <p class="comment__info">{{ review.body|linebreaksbr }}</p>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <p>No reviews yet. Be the first to review this project!</p>
                         {% endif %}
-                        {% endfor %}
+                    </div>
+                    
 
                     </div>
                 </div>

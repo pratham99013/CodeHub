@@ -30,7 +30,7 @@
                   <a title="Personal Website" href="#" target="_blank"><i class="im im-globe"></i></a>
                 </li>
               </ul>
-              {% if request.user.profile.id == profile.is %}
+              {% if request.user.profile.id != profile.is %}
               <a href="{% url 'createmessage' profile.id %}" class="btn btn--sub btn--lg">Send Message </a>
               {%endif%}
             </div>

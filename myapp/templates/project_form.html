@@ -19,10 +19,23 @@
                 {% endfor %}
                 
                 <!-- Tags Field -->
-                <div class="form__field">
-                    <label for="formInput#text">Tags</label>
-                    <textarea class="input" name="newtags" placeholder="Add tags here..."></textarea>
-                </div>
+              <!-- Existing Tags Field -->
+<div class="form__field">
+    <label for="tags">Select Existing Tags</label>
+    <select class="input" name="existing_tags" multiple>
+        {% for tag in tags %}
+        <option value="{{ tag.id }}">{{ tag.name }}</option>
+        {% endfor %}
+    </select>
+    <small>Hold Ctrl (or Cmd on Mac) to select multiple tags.</small>
+</div>
+
+<!-- Custom Tags Field -->
+<div class="form__field">
+    <label for="newtags">Add Custom Tags</label>
+    <textarea class="input" name="newtags" placeholder="Add tags here, separated by commas..."></textarea>
+</div>
+
                 
                 <!-- Submit Button -->
                 <input class="btn btn--sub btn--lg my-md" type="submit" value="Submit" />
