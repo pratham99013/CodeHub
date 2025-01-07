@@ -102,28 +102,33 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 
 
 # Retrieve the DATABASE URL from the environment or fallback to the default
+import os
+from urllib.parse import urlparse
+
+# Retrieve the database URL, prioritizing DATABASE_PUBLIC_URL over DATABASE_URL
 DATABASE_URL = os.getenv(
     'DATABASE_PUBLIC_URL',
     os.getenv(
         'DATABASE_URL',
-        'postgresql://postgres:ZwGNIFcVdpxYAktJIfHiGEsmuouQqyZo@viaduct.proxy.rlwy.net:15655/railway'
+        'postgresql://postgres:eJBffnNTqYVkEzmRrmCruVSiPuIrxXiM@viaduct.proxy.rlwy.net:50112/railway'
     )
 )
 
 # Parse the database URL
 url = urlparse(DATABASE_URL)
 
-# Database configuration
+# Configure Django's database settings
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': url.path[1:],  # Extract the database name (strip the leading '/')
-        'USER': url.username,  # Extract the username
-        'PASSWORD': url.password,  # Extract the password
-        'HOST': url.hostname,  # Extract the hostname
-        'PORT': url.port,  # Extract the port
+        'ENGINE': 'django.db.backends.postgresql',  # Use PostgreSQL
+        'NAME': url.path[1:],  # Strip the leading '/' to get the database name
+        'USER': url.username,  # Get the username from the URL
+        'PASSWORD': url.password,  # Get the password from the URL
+        'HOST': url.hostname,  # Get the hostname from the URL
+        'PORT': url.port,  # Get the port from the URL
     }
 }
+
 
 # DATABASES = {
 #     'default': {
