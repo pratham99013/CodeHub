@@ -117,13 +117,13 @@ DATABASE_URL = os.getenv(
 # Parse the database URL
 url = urlparse(DATABASE_URL)
 
-# Configure Django's database settings
+# Configure Django's database settingsgit 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',  # Use PostgreSQL
         'NAME': url.path[1:],  # Strip the leading '/' to get the database name
         'USER': url.username,  # Get the username from the URL
-        'PASSWORD': url.password,  # Get the password from the URL
+        'PASSWORD': os.environ['DB_PASSWORD_YO'],  # Get the password from the URL
         'HOST': url.hostname,  # Get the hostname from the URL
         'PORT': url.port,  # Get the port from the URL
     }
