@@ -104,7 +104,7 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-
+#YZxVIgrHCsGUv7HIKpDUX12HoxE
 cloudinary.config(
     cloud_name='dky1raka6',               # Replace with your Cloud Name
     api_key='696166664219783',            # Replace with your API Key
@@ -200,7 +200,7 @@ EMAIL_HOST_PASSWORD = 'qylt oawy jdlt zfqt'  # App-specific password (not your e
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/images/'
+MEDIA_URL = ''
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
@@ -208,7 +208,7 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+MEDIA_ROOT = None 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
