@@ -105,11 +105,6 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 #YZxVIgrHCsGUv7HIKpDUX12HoxE
-cloudinary.config(
-    cloud_name='dky1raka6',               # Replace with your Cloud Name
-    api_key='696166664219783',            # Replace with your API Key
-    api_secret='YZxVIgrHCsGUv7HIKpDUX12HoxE'       # Replace with your API Secret (truncated for security)
-)
 
 # Retrieve the DATABASE URL from the environment or fallback to the default
 import os
@@ -199,18 +194,22 @@ EMAIL_HOST_PASSWORD = 'qylt oawy jdlt zfqt'  # App-specific password (not your e
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-# Static files
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
+MEDIA_URL = '/images/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
+]
 STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
-
-# Media files (handled by Cloudinary)
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+cloudinary.config(
+    cloud_name='dky1raka6',               # Replace with your Cloud Name
+    api_key='696166664219783',            # Replace with your API Key
+    api_secret='YZxVIgrHCsGUv7HIKpDUX12HoxE'       # Replace with your API Secret (truncated for security)
+)
 
-# MEDIA_URL is optional when using Cloudinary, but you can add it for consistency
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'  # Safe fallback in case some files are locally stored
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
