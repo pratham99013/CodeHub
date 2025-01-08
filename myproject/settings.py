@@ -14,7 +14,10 @@ from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from urllib.parse import urlparse
+from dotenv import load_dotenv
 
+# Load environment variables from the .env file (if you still want to use .env for DATABASE_URL)
+load_dotenv()
 
 
 # Quick-start development settings - unsuitable for production
