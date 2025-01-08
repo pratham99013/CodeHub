@@ -199,17 +199,18 @@ EMAIL_HOST_PASSWORD = 'qylt oawy jdlt zfqt'  # App-specific password (not your e
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
+# Static files
 STATIC_URL = '/static/'
-MEDIA_URL = ''
-
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
+STATICFILES_DIRS = [BASE_DIR / 'static']
 STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+
+# Media files (handled by Cloudinary)
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-MEDIA_ROOT = None 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# MEDIA_URL is optional when using Cloudinary, but you can add it for consistency
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'  # Safe fallback in case some files are locally stored
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
