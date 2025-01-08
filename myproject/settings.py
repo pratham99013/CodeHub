@@ -14,6 +14,9 @@ from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from urllib.parse import urlparse
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 from dotenv import load_dotenv
 
 # Load environment variables from the .env file (if you still want to use .env for DATABASE_URL)
@@ -48,6 +51,8 @@ INSTALLED_APPS = [
     'userapp',
     'rest_framework',
       'corsheaders',  
+       'cloudinary',
+    'cloudinary_storage',
 
 ]
 REST_FRAMEWORK = {
@@ -100,7 +105,11 @@ WSGI_APPLICATION = 'myproject.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
-
+cloudinary.config(
+    cloud_name='dky1raka6',               # Replace with your Cloud Name
+    api_key='696166664219783',            # Replace with your API Key
+    api_secret='YZxVIgrHCsGUv7HIKpDUX12HoxE'       # Replace with your API Secret (truncated for security)
+)
 
 # Retrieve the DATABASE URL from the environment or fallback to the default
 import os
@@ -196,7 +205,8 @@ MEDIA_URL = '/images/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
