@@ -115,7 +115,7 @@ DATABASE_URL = os.getenv(
     'DATABASE_PUBLIC_URL',
     os.getenv(
         'DATABASE_URL',
-        'postgresql://postgres:QYenTQFBEscHxWkjkjhdsVocohSZVByW@yamanote.proxy.rlwy.net:41302/railway'
+        'postgresql://postgres:RHcoWNhsVOFQAckFtrNXnqGwrMASCgsB@caboose.proxy.rlwy.net:33623/railway'
     )
 )
 
