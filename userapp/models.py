@@ -13,7 +13,7 @@ class Profile(models.Model):
     email = models.EmailField(max_length=500, null=True, blank=True)
     short_intro = models.CharField(max_length=500, null=True, blank=True)
     bio = models.TextField(max_length=500, null=True, blank=True)
-    profile_image = models.ImageField(null=True, blank=True, upload_to='profiles/', default='hesam-link-NnOcGQhD48w-unsplash.jpg')
+    profile_image = models.ImageField(null=True, blank=True, upload_to='profiles/', default='ali-mammadli-ngAuVVO1lQ4-unsplash.jpg')
     social_github = models.CharField(max_length=200, null=True, blank=True)
     social_linkedin = models.CharField(max_length=200, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
